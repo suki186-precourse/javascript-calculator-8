@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { validateEmptyInput } from "./validators.js";
+import { validateEmptyInput, validatePositiveInteger } from "./validators.js";
 
 class App {
   async run() {
@@ -16,6 +16,10 @@ class App {
         Console.print("결과 : 0");
         return;
       }
+      // 양의 정수 검증
+      validatePositiveInteger([input]);
+
+      Console.print("입력값 검증 통과!");
     } catch (error) {
       Console.print(error.message);
       throw error; // Calculator에서 발생할 에러 감지용
