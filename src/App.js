@@ -17,16 +17,20 @@ class App {
         Console.print("결과 : 0");
         return;
       }
-      // 양의 정수 검증 -> 구분자로 분리된 숫자 배열 검증 예정
-      //validatePositiveInteger([input]);
 
       // === 3. 구분자 처리
-      const { delimiter, numbers } = getDelimiterAndNumber(input);
-      Console.print(`구분자: ${delimiter}, 숫자: ${numbers}`);
+      const { delimiter, numbersString } = getDelimiterAndNumber(input);
+      Console.print(`구분자: ${delimiter}, 숫자: ${numbersString}`);
 
       // === 4. 구분자를 기준으로 문자열 분리
-      const splitNumbers = numbers.split(delimiter);
+      const splitNumbers = numbersString.split(delimiter);
       Console.print(splitNumbers);
+
+      // === 5. 양의 정수 검증 및 문자를 숫자로 변환
+      validatePositiveInteger(splitNumbers);
+
+      const numbers = splitNumbers.map(Number);
+      Console.print(numbers);
 
       Console.print("입력값 검증 통과!");
     } catch (error) {

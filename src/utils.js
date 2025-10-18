@@ -24,10 +24,10 @@ export const getDelimiterAndNumber = (input) => {
 
   // 1. 커스텀 구분자 존재
   if (customDelimiter) {
-    const numbers = input.split(`//${customDelimiter}\\n`)[1];
-    return { delimiter: customDelimiter, numbers };
+    const numbersString = input.split(`//${customDelimiter}\\n`)[1];
+    return { delimiter: customDelimiter, numbersString };
   }
 
   // 2. 커스텀 구분자 없음
-  return { delimiter: DEFAULT_DELIMITERS, numbers: input };
+  return { delimiter: DEFAULT_DELIMITERS, numbersString: input };
 };
