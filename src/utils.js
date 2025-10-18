@@ -29,5 +29,8 @@ export const getDelimiterAndNumber = (input) => {
   }
 
   // 2. 커스텀 구분자 없음
-  return { delimiter: DEFAULT_DELIMITERS, numbersString: input };
+  const delimiter = new RegExp(
+    DEFAULT_DELIMITERS.map((d) => `\\${d}`).join("|")
+  );
+  return { delimiter, numbersString: input };
 };
