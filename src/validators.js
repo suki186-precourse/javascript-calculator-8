@@ -28,3 +28,21 @@ export const validatePositiveInteger = (values) => {
     }
   }
 };
+
+// 구분자 관련 예외 처리
+export const validateDelimiter = (delimiter, numberString) => {
+  // 1. 값 없이 구분자만 입력한 경우
+  if (!numberString || numberString.length === 0) {
+    throw new Error(`${ERROR} 더해야할 값이 없습니다.`);
+  }
+
+  // 2. 구분자가 숫자인 경우
+  if (!isNaN(delimiter)) {
+    throw new Error(`${ERROR} 숫자는 구분자로 사용할 수 없습니다.`);
+  }
+
+  // 3. 연속 구분자
+  if (numberString.includes(`${delimiter}${delimiter}`)) {
+    throw new Error(`${ERROR} 구분자가 연속으로 사용되었습니다.`);
+  }
+};

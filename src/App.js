@@ -1,5 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import { validateEmptyInput, validatePositiveInteger } from "./validators.js";
+import {
+  validateDelimiter,
+  validateEmptyInput,
+  validatePositiveInteger,
+} from "./validators.js";
 import { getDelimiterAndNumber } from "./utils.js";
 
 class App {
@@ -18,8 +22,9 @@ class App {
         return;
       }
 
-      // === 3. 구분자 처리
+      // === 3. 구분자 처리 및 유효성 검사
       const { delimiter, numbersString } = getDelimiterAndNumber(input);
+      validateDelimiter(delimiter, numbersString);
       Console.print(`구분자: ${delimiter}, 숫자: ${numbersString}`);
 
       // === 4. 구분자를 기준으로 문자열 분리
