@@ -20,8 +20,13 @@ class App {
       // 양의 정수 검증 -> 구분자로 분리된 숫자 배열 검증 예정
       //validatePositiveInteger([input]);
 
+      // === 3. 구분자 처리
       const { delimiter, numbers } = getDelimiterAndNumber(input);
       Console.print(`구분자: ${delimiter}, 숫자: ${numbers}`);
+
+      // === 4. 구분자를 기준으로 문자열 분리
+      const splitNumbers = numbers.split(delimiter);
+      Console.print(splitNumbers);
 
       Console.print("입력값 검증 통과!");
     } catch (error) {
