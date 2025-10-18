@@ -1,7 +1,7 @@
-/* ===== 입력값 유효성 검증 ===== */
-
 import { ERROR, POSITIVE_INTEGER } from "./constants.js";
 import { removeAllSpaces } from "./utils.js";
+
+/* ===== 입력값 유효성 검증 ===== */
 
 // 빈 문자열 체크 (공백만 있는 경우 포함) -> Calculator에서 처리
 export const validateEmptyInput = (input) => {

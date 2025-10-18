@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { validateEmptyInput, validatePositiveInteger } from "./validators.js";
+import { getDelimiterAndNumber } from "./utils.js";
 
 class App {
   async run() {
@@ -16,8 +17,11 @@ class App {
         Console.print("결과 : 0");
         return;
       }
-      // 양의 정수 검증
-      validatePositiveInteger([input]);
+      // 양의 정수 검증 -> 구분자로 분리된 숫자 배열 검증 예정
+      //validatePositiveInteger([input]);
+
+      const { delimiter, numbers } = getDelimiterAndNumber(input);
+      Console.print(`구분자: ${delimiter}, 숫자: ${numbers}`);
 
       Console.print("입력값 검증 통과!");
     } catch (error) {

@@ -5,3 +5,6 @@ export const ERROR = "[ERROR]";
 
 // 양의 정수
 export const POSITIVE_INTEGER = /^[1-9]\d*$/;
+
+// 기본 구분자 배열
+export const DEFAULT_DELIMITERS = [",", ":"];
