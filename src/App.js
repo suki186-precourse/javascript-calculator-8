@@ -32,7 +32,11 @@ class App {
       const numbers = splitNumbers.map(Number);
       Console.print(numbers);
 
-      Console.print("입력값 검증 통과!");
+      // === 6. 모든 숫자의 합 계산
+      const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+
+      // === 7. 계산된 합계 출력
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(error.message);
       throw error; // Calculator에서 발생할 에러 감지용
