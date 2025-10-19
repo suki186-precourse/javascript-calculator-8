@@ -42,7 +42,11 @@ export const validateDelimiter = (delimiter, numberString) => {
   }
 
   // 3. 연속 구분자
-  if (numberString.includes(`${delimiter}${delimiter}`)) {
+  if (
+    numberString.includes(`${delimiter}${delimiter}`) ||
+    numberString.includes("::") ||
+    numberString.includes(",,")
+  ) {
     throw new Error(`${ERROR} 구분자가 연속으로 사용되었습니다.`);
   }
 };
