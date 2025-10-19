@@ -1,4 +1,4 @@
-import { ERROR, POSITIVE_INTEGER } from "./constants.js";
+import { DEFAULT_DELIMITERS, ERROR, POSITIVE_INTEGER } from "./constants.js";
 import { removeAllSpaces } from "./utils.js";
 
 /* ===== 입력값 유효성 검증 ===== */
@@ -42,11 +42,10 @@ export const validateDelimiter = (delimiter, numberString) => {
   }
 
   // 3. 연속 구분자
-  if (
-    numberString.includes(`${delimiter}${delimiter}`) ||
-    numberString.includes("::") ||
-    numberString.includes(",,")
-  ) {
-    throw new Error(`${ERROR} 구분자가 연속으로 사용되었습니다.`);
+  const allDelimiters = [delimiter, ...DEFAULT_DELIMITERS];
+  for (const d of allDelimiters) {
+    if (numberString.includes(`${d}${d}`)) {
+      throw new Error(`${ERROR} 구분자가 연속으로 사용되었습니다.`);
+    }
   }
 };
