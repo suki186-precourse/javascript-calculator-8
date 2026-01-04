@@ -1,18 +1,14 @@
-import Calculator from "./domain/Calculator.js";
-import { InputView } from "./view/InputView.js";
-import { OutputView } from "./view/OutputView.js";
+import { CalculatorController } from "./controller/CalculatorController.js";
 
 class App {
+  #controller;
+
+  constructor() {
+    this.#controller = new CalculatorController();
+  }
+
   async run() {
-    try {
-      const calculator = new Calculator();
-      const input = await InputView.readDelimiterAndNumberString();
-      const result = calculator.calculate(input);
-      OutputView.printNumberSum(result);
-    } catch (error) {
-      OutputView.printError(error.message);
-      throw error;
-    }
+    await this.#controller.run();
   }
 }
 
