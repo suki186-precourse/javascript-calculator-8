@@ -8,7 +8,7 @@ export const OutputView = {
   },
 
   // 에러메세지 출력
-  //   printError(error) {
-  //     Console.print(error.message);
-  //   },
+  printError(error) {
+    Console.print(error.message);
+  },
 };

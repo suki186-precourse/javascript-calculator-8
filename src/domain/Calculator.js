@@ -1,4 +1,4 @@
-import { DELIMITERS } from "../constants.js";
+import { DELIMITERS, ERROR_MESSAGES } from "../constants.js";
 
 class Calculator {
   calculate(input) {
@@ -33,10 +33,24 @@ class Calculator {
 
     // 문자열 분리, 숫자 배열 변환 (기본, 커스텀 모두)
     const numbers = targetString.split(customDelimiter).map(Number);
-    console.log(numbers);
+
+    // 유효성 검증
+    this.#validate(numbers, targetString);
 
     // 결과 배열 반환
     return numbers;
+  }
+
+  #validate(numbers, targetString) {
+    if (numbers.length === 0) {
+      throw new Error(ERROR_MESSAGES.EMPTY_NUMBER);
+    }
+    // 숫자 검증
+    numbers.forEach((num) => {
+      if (isNaN(num) || num <= 0) {
+        throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
+      }
+    });
   }
 }
 export default Calculator;
