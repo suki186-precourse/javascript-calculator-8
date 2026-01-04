@@ -17,33 +17,41 @@ class Calculator {
   #parseInput(input) {
     // 커스텀 구분자 추출
     const match = input.match(/^\/\/(.)\\n/); // 커스텀 구분자 있는지
-    let customDelimiter;
+    let delimiter;
     let targetString;
 
     // 분리할 문자열 확정
     if (match) {
       // 커스텀 구분자 있는 경우
-      customDelimiter = match[1];
+      const customDelimiter = match[1];
+      this.#validateCustomDelimiter(customDelimiter);
 
-      if (!isNaN(customDelimiter)) {
-        throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
-      }
-
-      targetString = input.split(`//${customDelimiter}\\n`)[1];
+      delimiter = new RegExp(
+        `[${DELIMITERS.DEFAULT.join("")}${customDelimiter}]`
+      );
+      targetString = input.split(
+        `${DELIMITERS.CUSTOM_START}${customDelimiter}${DELIMITERS.CUSTOM_END}`
+      )[1];
     } else {
       // 없는 경우
-      customDelimiter = new RegExp(`[${DELIMITERS.DEFAULT.join("")}]`);
+      delimiter = new RegExp(`[${DELIMITERS.DEFAULT.join("")}]`);
       targetString = input;
     }
 
     // 문자열 분리, 숫자 배열 변환 (기본, 커스텀 모두)
-    const numbers = targetString.split(customDelimiter).map(Number);
+    const numbers = targetString.split(delimiter).map(Number);
 
     // 유효성 검증
-    this.#validate(numbers, targetString, customDelimiter);
+    this.#validate(numbers, targetString, delimiter);
 
     // 결과 배열 반환
     return numbers;
+  }
+
+  #validateCustomDelimiter(delimiter) {
+    if (!isNaN(delimiter)) {
+      throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
+    }
   }
 
   #validate(numbers, targetString, customDelimiter) {
@@ -54,6 +62,7 @@ class Calculator {
     if (targetString.includes(`${customDelimiter}${customDelimiter}`)) {
       throw new Error(ERROR_MESSAGES.DUPLICATE_DELIMITER);
     }
+
     // 숫자 검증
     numbers.forEach((num) => {
       if (isNaN(num) || num <= 0) {
