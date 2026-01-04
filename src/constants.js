@@ -1,9 +1,9 @@
 export const INPUT_MESSAGES = Object.freeze({
-  START: "덧셈할 문자열을 입력해 주세요.",
+  START: "덧셈할 문자열을 입력해 주세요.\n",
 });
 
 export const OUTPUT_MESSAGES = Object.freeze({
-  RESULT: "결과 : ",
+  RESULT: (sum) => `결과 : ${sum}`,
 });
 
 export const DELIMITERS = Object.freeze({
