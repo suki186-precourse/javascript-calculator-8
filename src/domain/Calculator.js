@@ -24,6 +24,11 @@ class Calculator {
     if (match) {
       // 커스텀 구분자 있는 경우
       customDelimiter = match[1];
+
+      if (!isNaN(customDelimiter)) {
+        throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
+      }
+
       targetString = input.split(`//${customDelimiter}\\n`)[1];
     } else {
       // 없는 경우
@@ -35,15 +40,19 @@ class Calculator {
     const numbers = targetString.split(customDelimiter).map(Number);
 
     // 유효성 검증
-    this.#validate(numbers, targetString);
+    this.#validate(numbers, targetString, customDelimiter);
 
     // 결과 배열 반환
     return numbers;
   }
 
-  #validate(numbers, targetString) {
+  #validate(numbers, targetString, customDelimiter) {
     if (numbers.length === 0) {
       throw new Error(ERROR_MESSAGES.EMPTY_NUMBER);
+    }
+
+    if (targetString.includes(`${customDelimiter}${customDelimiter}`)) {
+      throw new Error(ERROR_MESSAGES.DUPLICATE_DELIMITER);
     }
     // 숫자 검증
     numbers.forEach((num) => {
